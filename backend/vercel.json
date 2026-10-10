@@ -5,9 +5,14 @@
       "src": "api/index.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["prisma/**", "node_modules/.prisma/**", "node_modules/@prisma/client/**"]
+        "maxDuration": 60,
+        "includeFiles": [
+          "prisma/**",
+          "node_modules/.prisma/**",
+          "node_modules/@prisma/client/**"
+        ]
       }
     }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "api/index.ts" }]
+  "routes": [{ "src": "/(.*)", "dest": "/api/index.ts" }]
 }

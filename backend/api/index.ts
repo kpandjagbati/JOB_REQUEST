@@ -1,20 +1,22 @@
 import 'reflect-metadata';
-import type { IncomingMessage, ServerResponse } from 'node:http';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import express from 'express';
+import express, { type Express } from 'express';
 import { AppModule } from '../src/app.module.js';
 
-const expressApp = express();
-let ready: Promise<express.Express> | null = null;
+let expressApp: Express | null = null;
+let ready: Promise<Express> | null = null;
 
-async function createApp() {
+async function createApp(): Promise<Express> {
+  const instance = express();
   const app = await NestFactory.create(
     AppModule,
-    new ExpressAdapter(expressApp),
+    new ExpressAdapter(instance),
     { logger: ['error', 'warn', 'log'] },
   );
+
   app.setGlobalPrefix('api');
   app.enableCors({ origin: true, credentials: true });
   app.useGlobalPipes(
@@ -24,8 +26,10 @@ async function createApp() {
       transformOptions: { enableImplicitConversion: true },
     }),
   );
+
   await app.init();
-  return expressApp;
+  expressApp = instance;
+  return instance;
 }
 
 function getApp() {
@@ -33,10 +37,10 @@ function getApp() {
   return ready;
 }
 
-export default async function handler(
-  req: IncomingMessage,
-  res: ServerResponse,
-) {
-  const server = await getApp();
-  server(req, res);
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  const app = await getApp();
+  return new Promise<void>((resolve) => {
+    res.on('finish', () => resolve());
+    app(req as never, res as never);
+  });
 }
