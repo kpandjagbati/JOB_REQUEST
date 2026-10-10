@@ -1,0 +1,9 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install --legacy-peer-deps && npx prisma generate && npm run build"
+
+[deploy]
+startCommand = "npx prisma migrate deploy && npx tsx prisma/seed.ts && npm run start:prod"
+healthcheckPath = "/api/jobs"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"

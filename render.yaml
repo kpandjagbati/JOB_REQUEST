@@ -1,0 +1,28 @@
+databases:
+  - name: jobquest-db
+    plan: free
+    databaseName: jobboard
+    user: jobboard
+
+services:
+  - type: web
+    name: jobquest-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install --legacy-peer-deps && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && npx tsx prisma/seed.ts && npm run start:prod
+    healthCheckPath: /api/jobs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: jobquest-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: FRONTEND_URL
+        value: https://jobquest-taupe.vercel.app
