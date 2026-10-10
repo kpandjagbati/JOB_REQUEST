@@ -7,6 +7,8 @@ node_modules/
 .env.*
 !.env.example
 !**/.env.example
+pgadmin/passwords.txt
+pgadmin/*.local.json
 
 # Builds
 dist/
