@@ -5,24 +5,27 @@ Full stack : **Next.js + Tailwind + DaisyUI (fantasy)** / **NestJS + Prisma + Po
 ## Démarrage rapide
 
 ```bash
-# 1. Base de données
+# 1. Base de données (Postgres exposé sur le port 5433)
 docker compose up -d
 
 # 2. Backend
 cd backend
+cp .env.example .env
 npm install --legacy-peer-deps
-npx prisma migrate dev --name init
+npx prisma migrate dev
 npx prisma db seed
 npm run start:dev
 
 # 3. Frontend (autre terminal)
 cd frontend
+cp .env.example .env.local
 npm install
 npm run dev
 ```
 
 - Frontend : http://localhost:3000  
 - API : http://localhost:3001/api  
+- Postgres : `localhost:5433`
 
 ### Comptes de démo
 
