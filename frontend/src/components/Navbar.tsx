@@ -9,6 +9,7 @@ import {
   PlusCircle,
   UserRound,
 } from "lucide-react";
+import { UserAvatar } from "@/components/UserAvatar";
 import { useAuth } from "@/context/AuthContext";
 
 export function Navbar() {
@@ -87,17 +88,12 @@ export function Navbar() {
           <span className="loading loading-spinner loading-sm" />
         ) : user ? (
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar placeholder"
-            >
-              <div className="bg-primary text-primary-content w-10 rounded-full">
-                <span>
-                  {user.firstName[0]}
-                  {user.lastName[0]}
-                </span>
-              </div>
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+              <UserAvatar
+                firstName={user.firstName}
+                lastName={user.lastName}
+                size="sm"
+              />
             </div>
             <ul
               tabIndex={0}

@@ -12,6 +12,7 @@ import {
   Phone,
   UserRound,
 } from "lucide-react";
+import { UserAvatar } from "@/components/UserAvatar";
 import { useAuth } from "@/context/AuthContext";
 
 export default function ProfilePage() {
@@ -30,7 +31,6 @@ export default function ProfilePage() {
     );
   }
 
-  const initials = `${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase();
   const roleLabel = user.role === "RECRUITER" ? "Recruteur" : "Candidat";
   const memberSince = new Date(user.createdAt).toLocaleDateString("fr-FR", {
     day: "numeric",
@@ -51,13 +51,12 @@ export default function ProfilePage() {
         <div className="bg-base-100 border border-base-300 rounded-box overflow-hidden shadow-sm">
           <div className="bg-primary/10 px-6 py-8 md:px-10">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-              <div className="avatar">
-                <div className="w-28 h-28 rounded-full bg-primary text-primary-content ring ring-primary ring-offset-base-100 ring-offset-2 flex items-center justify-center">
-                  <span className="text-4xl font-bold font-display leading-none">
-                    {initials}
-                  </span>
-                </div>
-              </div>
+              <UserAvatar
+                firstName={user.firstName}
+                lastName={user.lastName}
+                size="lg"
+                className="ring-4 ring-primary/30 ring-offset-4 ring-offset-base-100"
+              />
 
               <div className="text-center md:text-left flex-1">
                 <h2 className="text-2xl md:text-3xl font-semibold font-display">
