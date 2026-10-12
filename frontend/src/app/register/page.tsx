@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { Illustration } from "@/components/Illustration";
 import { useAuth } from "@/context/AuthContext";
 
 export default function RegisterPage() {
@@ -37,7 +38,14 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-12">
-      <div className="card w-full max-w-lg bg-base-100 border border-base-300 shadow-lg">
+      <div className="w-full max-w-5xl grid md:grid-cols-2 gap-8 items-center">
+        <div className="hidden md:block px-4">
+          <Illustration
+            name="online-resume"
+            alt="Illustration Undraw — inscription"
+          />
+        </div>
+      <div className="card w-full max-w-lg bg-base-100 border border-base-300 shadow-lg mx-auto">
         <form onSubmit={onSubmit} className="card-body gap-4">
           <h1 className="card-title text-2xl font-display text-primary justify-center">
             Créer un compte
@@ -140,6 +148,7 @@ export default function RegisterPage() {
             </Link>
           </p>
         </form>
+      </div>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Illustration } from "@/components/Illustration";
 import { JobCard } from "@/components/JobCard";
 import { jobsApi } from "@/lib/api";
 import type { Job } from "@/lib/types";
@@ -121,8 +122,13 @@ function JobsContent() {
       )}
 
       {!loading && !error && jobs.length === 0 && (
-        <div className="alert">
-          <span>Aucune offre ne correspond à votre recherche.</span>
+        <div className="flex flex-col items-center text-center py-10 gap-4">
+          <div className="max-w-xs w-full">
+            <Illustration name="empty" alt="Aucune offre trouvée" />
+          </div>
+          <p className="opacity-80">
+            Aucune offre ne correspond à votre recherche.
+          </p>
         </div>
       )}
 

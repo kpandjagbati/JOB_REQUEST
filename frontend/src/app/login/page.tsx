@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useState } from "react";
+import { Illustration } from "@/components/Illustration";
 import { useAuth } from "@/context/AuthContext";
 
 function LoginForm() {
@@ -36,7 +37,11 @@ function LoginForm() {
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-12">
-      <div className="card w-full max-w-md bg-base-100 border border-base-300 shadow-lg">
+      <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-center">
+        <div className="hidden md:block px-4">
+          <Illustration name="login" alt="Illustration Undraw — connexion" />
+        </div>
+      <div className="card w-full bg-base-100 border border-base-300 shadow-lg">
         <form onSubmit={onSubmit} className="card-body gap-4">
           <h1 className="card-title text-2xl font-display text-primary justify-center">
             Connexion
@@ -88,6 +93,7 @@ function LoginForm() {
             </Link>
           </p>
         </form>
+      </div>
       </div>
     </div>
   );
