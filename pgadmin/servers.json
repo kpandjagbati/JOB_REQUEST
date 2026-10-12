@@ -1,0 +1,32 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "JobQuest Neon (Prod)",
+      "Group": "JobQuest",
+      "Host": "ep-raspy-dust-ar7alzk0.c-4.us-west-2.aws.neon.tech",
+      "Port": 5432,
+      "MaintenanceDB": "neondb",
+      "Username": "neondb_owner",
+      "Comment": "Base Neon JobQuest (production)",
+      "SSLMode": "require",
+      "Timeout": 10,
+      "UseSSHTunnel": 0,
+      "TunnelPort": "22",
+      "TunnelAuthentication": 0
+    },
+    "2": {
+      "Name": "JobQuest Local (Docker)",
+      "Group": "JobQuest",
+      "Host": "localhost",
+      "Port": 5433,
+      "MaintenanceDB": "jobboard",
+      "Username": "jobboard",
+      "Comment": "Postgres Docker local - port 5433",
+      "SSLMode": "prefer",
+      "Timeout": 10,
+      "UseSSHTunnel": 0,
+      "TunnelPort": "22",
+      "TunnelAuthentication": 0
+    }
+  }
+}

@@ -31,8 +31,12 @@ export default function RootLayout({
       lang="fr"
       data-theme="fantasy"
       className={`${display.variable} ${sans.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans antialiased">
+      <body
+        className="min-h-full flex flex-col font-sans antialiased"
+        suppressHydrationWarning
+      >
         <AuthProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
